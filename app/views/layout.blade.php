@@ -7,13 +7,17 @@
     <body>
     	
     	<div class="container">
-    		<div class="">
-    		</div>
-        <h1>Dashboard</h1>
-
-        @yield('content')
-    	
-    	<script src="{{ asset('assets/css/bootstrap.js') }}"></script>
+    		
+			<ul class="nav navbar-nav navbar-right">
+			  <li class="active"><a href="{{{ URL::to('projects') }}}">Home</a></li>
+			  <li><a href="{{{ URL::to('users') }}}">Users</a></li>
+			  <li><a href="{{{ URL::to('projects/add-project') }}}">Add Project</a></li>
+			</ul>
+    			
+			<h1>Dashboard</h1>
+		    @yield('content')
+			
+			<script src="{{ asset('assets/css/bootstrap.js') }}"></script>
     	</div>
     </body>
 </html>

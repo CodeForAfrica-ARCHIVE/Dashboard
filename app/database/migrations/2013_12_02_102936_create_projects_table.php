@@ -16,6 +16,8 @@ class CreateProjectsTable extends Migration {
 		$table->increments('p_id');
 		$table->string('p_title');
 		$table->string('p_description');
+		$table->string('p_link');
+		$table->string('p_logo');
 		$table->timestamps();
 	    });
 	}
