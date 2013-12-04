@@ -30,6 +30,24 @@ class ProjectController extends BaseController {
 		$title = $project->p_title;
 		return View::make('view_project', compact('title', 'project'));
 	}
+	public function postProcessEdit(){
+		
+		$file = Input::file('logo'); 
+		$resultarray = Project::edit($_POST, $file);
+		//
+		$message = $resultarray[0];
+		$error = $resultarray[1];
+		return $this->getEditProject($message, $error, $_POST['id']);
+	}
+	public function getEditProject($message="", $error=0, $id=0){
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+		}
+		$project = Project::singleproject($id);
+		
+		$title = $project->p_title;
+		return View::make('edit_project', compact('title', 'project', 'message', 'error'));
+	}
 	public function getDeleteProject(){
 		if(Project::deleteproject($_GET['id']))
 		{

@@ -20,6 +20,43 @@ class Project extends Eloquent {
 			return false;
 		}
 	}
+
+	public static function edit($post, $file){
+		//form validation	
+		$validator = Validator::make(
+		    array('title' => $post['title'],
+				  'description' => $post['description']
+				  ),
+		    array('title' => array('required'),
+		    	  'description'=>array('required'),
+			)
+		);
+		
+		if ($validator->fails()){
+		    // The given data did not pass validation
+		    $message = $validator->messages();
+			$error = 1;
+		}else{
+			
+			if($file==null){
+				$newfilename=$post['old_logo'];
+			}else{
+				$extension =$file->getClientOriginalExtension();
+				$newfilename = sha1(time().time()).".".$extension;
+				$destinationPath = 'uploads/';
+				$uploadSuccess = $file->move($destinationPath, $newfilename);
+			}			
+			//db update
+			
+			DB::table('projects')->where('p_id', $post['id'])->update(
+   			 array('p_title' => $post['title'], 'p_description' => $post['description'], 'p_logo'=>$newfilename, 'p_link'=>$post['link'])
+			);
+			
+			$message = "Edited successfully!";
+			$error = 0;
+		}
+		return array($message, $error);
+	}
 	public static function process($post, $file){
 		//form validation	
 		$validator = Validator::make(
@@ -47,7 +84,7 @@ class Project extends Eloquent {
 			}			
 			//db insert
 			DB::table('projects')->insert(
-   			 array('p_title' => $post['title'], 'p_description' => $post['description'], 'p_logo'=>$newfilename)
+   			 array('p_title' => $post['title'], 'p_description' => $post['description'], 'p_logo'=>$newfilename, 'p_link'=>$post['link'])
 			);
 			
 			$message = "Added successfully!";
