@@ -8,9 +8,17 @@ class Project extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'projects';
+	
 	public static function singleproject($id){
 		$project = DB::table('projects')->where('p_id', $id)->first();
 		return $project;
+	}
+	public static function deleteproject($id){
+		if(DB::table('projects')->where('p_id', $id)->delete()){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	public static function process($post, $file){
 		//form validation	

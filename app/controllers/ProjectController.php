@@ -30,6 +30,16 @@ class ProjectController extends BaseController {
 		$title = $project->p_title;
 		return View::make('view_project', compact('title', 'project'));
 	}
+	public function getDeleteProject(){
+		if(Project::deleteproject($_GET['id']))
+		{
+			$result = "Deleted succesfully!";
+		}else{
+			$result = "Problem deleting!";
+		}
+		$title = "Delete Project";
+		return View::make('delete_project', compact('title', 'result'));
+	}
 	
 }
 ?>
