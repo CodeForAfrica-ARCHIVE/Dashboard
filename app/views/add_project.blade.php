@@ -15,7 +15,7 @@
 <div class='row'>
 	<div class="col-md-9">
 		<h4>Add Project</h4>
-		{{ Form::open(array('url' => URL::to('projects').'/process-add')) }}
+		{{ Form::open(array('url' => URL::to('projects').'/process-add', 'files'=>'true')) }}
 			{{ Form::text('title', null, array('placeholder'=>'Title', 'type'=>'text', 'class'=>'form-control')) }}
 			<br />
 			{{ Form::text('link', null, array('placeholder'=>'Link', 'type'=>'text', 'class'=>'form-control')) }}
