@@ -3,13 +3,31 @@
 class ProjectController extends BaseController {
  	
 	public function getIndex(){
-        //
-        $title = "List Projects";
+		//check if user exists, update, else redirect to login and access denied
+		$email = Auth::user()->email;			
+		if($this->user_exists($email)){			
+			//
+        	$title = "List Projects";
 		
-        $projects = Project::all();
+        	$projects = Project::all();
 		
-		return View::make('projects', compact('projects', 'title'));	
+			return View::make('projects', compact('projects', 'title'));
+		}else{
+			return View::make('login', array('title'=>'Login', 'access_denied'=>'1', 'authUrl' => Auth::getProvider()->getAuthUrl()));
+		}
+        	
     }
+	public function user_exists($email){
+		$count = DB::table('users')->where('email', $email)->count();
+		if($count>0){
+			//update profile
+			DB::table('users')->where('email', $email)->update(array('name'=>Auth::user()->name, 'picture'=>Auth::user()->picture, 'link'=>Auth::user()->link));
+			//
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function getAddProject($message = "", $error = 0){
 		$title = "Add Project";
 		
