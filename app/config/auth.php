@@ -15,8 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'eloquent',
-
+	'driver' => 'google',
 	/*
 	|--------------------------------------------------------------------------
 	| Authentication Model

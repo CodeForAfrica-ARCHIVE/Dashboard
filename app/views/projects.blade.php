@@ -7,6 +7,7 @@
   @if(count($projects)===0)
   	{{ "No projects added!" }}
   @endif
+  
   <div class="row">
    @foreach($projects as $project)
    		<div class="col-md-3">
@@ -21,4 +22,5 @@
         </div>
     @endforeach
     </div>
+   
 @stop

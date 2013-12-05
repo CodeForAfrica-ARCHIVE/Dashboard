@@ -81,7 +81,8 @@ return array(
 	'providers' => array(
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-		'Illuminate\Auth\AuthServiceProvider',
+		//'Illuminate\Auth\AuthServiceProvider',
+		'Themonkeys\LaravelGoogleAuth\LaravelGoogleAuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',

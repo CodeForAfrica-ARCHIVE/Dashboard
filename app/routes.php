@@ -15,12 +15,26 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
 Route::get('users', function()
 {
 	$users = User::all();	
-    return View::make('users')->with('users', $users);
+    return View::make('users', array('title'=>'Users'))->with('users', $users);
 });
+
 Route::controller('projects', 'ProjectController');
+
+Route::get('/logout', function() {
+    Auth::logout();
+    return Redirect::to('/login');
+});
+
+Route::get('/login', function() {
+    return View::make('login', array('title'=>'Login',
+      'authUrl' => Auth::getProvider()->getAuthUrl()
+    ));
+});
+
 /*Route::get('projects', function(){
 	$projects = Project::all();
 	return View::make('projects')->with('projects', $projects);	
